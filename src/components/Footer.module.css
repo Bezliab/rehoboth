@@ -1,0 +1,190 @@
+/* File: src/components/Footer.module.css */
+
+.footer {
+  background: var(--primary);
+  color: rgba(250, 249, 246, 0.82);
+  margin-top: auto;
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 5rem 5vw 3.5rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 3rem;
+}
+
+/* Brand Column */
+.brand {}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.logoMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--gold);
+  color: var(--primary);
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 2px;
+}
+
+.logoText {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--surface);
+}
+
+.brandTagline {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: rgba(250, 249, 246, 0.6);
+  max-width: 280px;
+  margin-bottom: 1.5rem;
+}
+
+.socials {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(250, 249, 246, 0.2);
+  border-radius: 2px;
+  color: rgba(250, 249, 246, 0.7);
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.socialIcon:hover {
+  background: var(--gold);
+  color: var(--primary);
+  border-color: var(--gold);
+}
+
+.socialIcon .material-symbols-outlined {
+  font-size: 18px;
+}
+
+/* Columns */
+.col {}
+
+.colTitle {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+
+.colList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.colLink {
+  font-size: 0.85rem;
+  color: rgba(250, 249, 246, 0.6);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+
+.colLink:hover {
+  color: var(--surface);
+}
+
+/* Contact */
+.contactList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.contactList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: rgba(250, 249, 246, 0.6);
+  line-height: 1.5;
+}
+
+.contactList .material-symbols-outlined {
+  font-size: 16px;
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Bottom */
+.bottom {
+  border-top: 1px solid rgba(250, 249, 246, 0.1);
+  padding: 1.5rem 5vw;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bottom p {
+  font-size: 0.75rem;
+  color: rgba(250, 249, 246, 0.4);
+}
+
+.bottomLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.bottomLink {
+  font-size: 0.75rem;
+  color: rgba(250, 249, 246, 0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.bottomLink:hover {
+  color: rgba(250, 249, 246, 0.8);
+}
+
+@media (max-width: 1024px) {
+  .inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 3rem 5vw 2rem;
+  }
+
+  .bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}

@@ -1,0 +1,439 @@
+/* File: src/pages/CollectionsPage.module.css */
+
+.page {
+  background: var(--surface);
+  min-height: 100vh;
+}
+
+/* Header */
+.pageHeader {
+  background: var(--primary);
+  padding: 4rem 5vw 3rem;
+}
+
+.headerInner {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.pageTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--surface);
+  margin-bottom: 0.75rem;
+}
+
+.pageSub {
+  font-size: 0.9rem;
+  color: rgba(250, 249, 246, 0.65);
+  max-width: 520px;
+  line-height: 1.72;
+}
+
+/* Hero Collection */
+.heroColl {
+  padding: 5rem 5vw;
+  background: var(--surface-container-low);
+}
+
+.heroCollInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.heroCollImg {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+
+.heroCollImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.heroCollImg:hover img {
+  transform: scale(1.05);
+}
+
+.eyebrowDark {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.heroCollTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+.heroCollTagline {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 1.25rem;
+}
+
+.heroCollDesc {
+  font-size: 0.9rem;
+  color: var(--on-surface-variant);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.heroCollMeta {
+  margin-bottom: 2rem;
+}
+
+.collCount {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(23, 49, 36, 0.2);
+}
+
+.heroCollBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-container) 100%
+  );
+  color: var(--surface);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.heroCollBtn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.heroCollBtn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+/* Grid Section */
+.gridSection {
+  padding: 5rem 5vw;
+  background: var(--surface);
+}
+.gridInner {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.gridHeader {
+  margin-bottom: 3rem;
+}
+
+.gridTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.collectionsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* Card */
+.collectionCard {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  aspect-ratio: 3/4;
+  background: var(--surface-container-low);
+}
+
+.cardImg {
+  position: absolute;
+  inset: 0;
+}
+
+.cardImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.75s ease;
+}
+
+.collectionCard:hover .cardImg img {
+  transform: scale(1.08);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(23, 49, 36, 0.85) 0%,
+    rgba(23, 49, 36, 0.25) 50%,
+    rgba(23, 49, 36, 0.05) 100%
+  );
+  transition: background 0.4s;
+}
+
+.collectionCard:hover .cardOverlay {
+  background: linear-gradient(
+    to top,
+    rgba(23, 49, 36, 0.92) 0%,
+    rgba(23, 49, 36, 0.4) 60%,
+    rgba(23, 49, 36, 0.1) 100%
+  );
+}
+
+.cardBody {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
+}
+
+.cardCount {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(23, 49, 36, 0.5);
+  backdrop-filter: blur(6px);
+  padding: 0.25rem 0.6rem;
+}
+
+.cardName {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--surface);
+  margin-bottom: 0.3rem;
+  line-height: 1.15;
+}
+
+.cardTagline {
+  font-size: 0.75rem;
+  color: rgba(250, 249, 246, 0.68);
+  line-height: 1.5;
+  margin-bottom: 0.85rem;
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+}
+
+.collectionCard:hover .cardCta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardCta .material-symbols-outlined {
+  font-size: 13px;
+}
+
+/* Why Section */
+.whySection {
+  background: var(--surface-container-low);
+  padding: 6rem 5vw;
+}
+.whyInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.whyTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.whySub {
+  font-size: 0.88rem;
+  color: var(--secondary);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+.whyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+  border-bottom: 1px solid var(--primary);
+  padding-bottom: 2px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.whyBtn:hover {
+  opacity: 0.65;
+}
+.whyBtn .material-symbols-outlined {
+  font-size: 14px;
+}
+
+.whyStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.statCard {
+  background: var(--surface-container-lowest);
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-top: 3px solid var(--gold);
+}
+
+.statNum {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.statLabel {
+  font-size: 0.78rem;
+  color: var(--secondary);
+  line-height: 1.5;
+}
+
+/* CTA Banner */
+.ctaBanner {
+  background: var(--primary);
+  padding: 4rem 5vw;
+  text-align: center;
+}
+
+.ctaBannerInner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ctaBannerTitle {
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--surface);
+  margin-bottom: 0.75rem;
+}
+
+.ctaBannerSub {
+  font-size: 0.88rem;
+  color: rgba(250, 249, 246, 0.65);
+  margin-bottom: 2rem;
+}
+
+.ctaBannerBtn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+
+.ctaBannerBtn:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+  .heroCollInner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .heroCollImg {
+    aspect-ratio: 16/9;
+  }
+  .collectionsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .whyInner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .collectionsGrid {
+    grid-template-columns: 1fr;
+  }
+  .whyStats {
+    grid-template-columns: 1fr;
+  }
+}
