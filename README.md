@@ -3,6 +3,7 @@
 Premium e-commerce frontend for Rehoboth Fabrics, specialists in luxury clothing materials and Aso-Ebi.
 
 ## Tech Stack
+
 - **React 18** + **Vite**
 - **React Router DOM v6** (client-side routing)
 - **CSS Modules** (scoped styles per component)
@@ -34,6 +35,7 @@ src/
 │   └── CartContext.jsx          # Cart state (useReducer)
 ├── data/
 │   └── products.js              # Products, categories, Aso-Ebi data
+│   └── fabricImages.json        # Fabric images
 ├── components/
 │   ├── Navbar.jsx / .module.css
 │   ├── Footer.jsx / .module.css
@@ -51,12 +53,14 @@ src/
 ## Design System
 
 Based on the **"Digital Loom"** design system:
+
 - **Primary**: `#173124` (Deep Forest Green)
 - **Gold Accent**: `#C9A84C`
 - **Surface**: `#faf9f6` (Warm Off-White)
 - **Fonts**: Noto Serif (display) + Manrope (body)
 
 ## Features
+
 - ✅ Fully responsive (mobile, tablet, desktop)
 - ✅ Slide-in Cart Drawer with quantity management
 - ✅ Fabric shimmer hover micro-interactions
