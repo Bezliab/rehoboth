@@ -16,7 +16,8 @@
 }
 
 /* Brand Column */
-.brand {}
+.brand {
+}
 
 .logoWrap {
   display: flex;
@@ -68,7 +69,10 @@
   border: 1px solid rgba(250, 249, 246, 0.2);
   border-radius: 2px;
   color: rgba(250, 249, 246, 0.7);
-  transition: background 0.25s, color 0.25s, border-color 0.25s;
+  transition:
+    background 0.25s,
+    color 0.25s,
+    border-color 0.25s;
 }
 
 .socialIcon:hover {
@@ -82,7 +86,8 @@
 }
 
 /* Columns */
-.col {}
+.col {
+}
 
 .colTitle {
   font-family: var(--font-body);
@@ -94,10 +99,17 @@
   margin-bottom: 1.25rem;
 }
 
-.colList {
+.colLis {
   list-style: none;
   display: flex;
   flex-direction: column;
+  gap: 0.6rem;
+}
+
+.colList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.6rem;
 }
 

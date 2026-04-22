@@ -111,7 +111,7 @@ export default function Footer() {
         {/* Quick Links */}
         <div className={styles.col}>
           <h4 className={styles.colTitle}>Quick Links</h4>
-          <ul className={styles.colList}>
+          <ul className={styles.colLis}>
             {QUICK_LINKS.map(({ to, label }) => (
               <li key={to}>
                 <Link to={to} className={styles.colLink}>
@@ -126,15 +126,29 @@ export default function Footer() {
         <div className={styles.col}>
           <h4 className={styles.colTitle}>Categories</h4>
           <ul className={styles.colList}>
-            {["Lace", "Ankara", "Silk", "George", "Aso-Oke", "Brocade"].map(
-              (c) => (
-                <li key={c}>
-                  <Link to="/shop" className={styles.colLink}>
-                    {c}
-                  </Link>
-                </li>
-              ),
-            )}
+            {[
+              "Lace",
+              "Ankara",
+              "Silk",
+              "George",
+              "Aso-Ebi",
+              "Guinea",
+              "Kampala",
+              "Cashmere",
+              "Cotton",
+              "Denim",
+              "Chiffon",
+              "Satin",
+              "Organza",
+              "Damask",
+              "Kente",
+            ].map((c) => (
+              <li key={c}>
+                <Link to="/shop" className={styles.colLink}>
+                  {c}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 

@@ -405,6 +405,7 @@
   transition:
     opacity 0.2s,
     transform 0.2s;
+  border-radius: 5px;
 }
 
 .ctaBannerBtn:hover {
