@@ -2,7 +2,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { asoEbiCollections } from "../data/products";
+import { dynamicCategories } from "../data/fabricUtils";
 import styles from "./AsoEbiPage.module.css";
+
+// Pull Aso-Ebi images from JSON
+const asoEbiCat = dynamicCategories.find((c) => c.key === "Aso-Ebi");
+const ASO_HERO_BG  = asoEbiCat?.previewImages?.[0] ||
+  "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1600&q=85";
+const ASO_CARD_IMAGES = asoEbiCat?.previewImages ?? [];
 
 const OCCASIONS = [
   "All",
@@ -40,7 +47,7 @@ export default function AsoEbiPage() {
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <img
-            src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1600&q=85"
+            src={ASO_HERO_BG}
             alt="Aso-Ebi fabrics"
             className={styles.heroBgImg}
           />
@@ -136,10 +143,14 @@ export default function AsoEbiPage() {
           </div>
 
           <div className={styles.collectionsGrid}>
-            {asoEbiCollections.map((col) => (
+            {asoEbiCollections.map((col, idx) => (
               <div key={col.id} className={styles.collectionCard}>
                 <div className={`${styles.collectionImg} fabric-shimmer`}>
-                  <img src={col.image} alt={col.name} />
+                  <img
+                    src={ASO_CARD_IMAGES[idx + 1] || col.image}
+                    alt={col.name}
+                    loading="lazy"
+                  />
                   <span className={styles.occBadge}>{col.occasion}</span>
                 </div>
                 <div className={styles.collectionBody}>

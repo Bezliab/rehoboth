@@ -1,7 +1,8 @@
 // File: src/pages/HomePage.jsx
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { products, categories, asoEbiCollections } from "../data/products";
+import { dynamicCategories, featuredByCategory } from "../data/fabricUtils";
+import { asoEbiCollections } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import styles from "./HomePage.module.css";
 
@@ -15,7 +16,7 @@ function useReveal() {
       ([entry]) => {
         if (entry.isIntersecting) el.classList.add(styles.revealed);
       },
-      { threshold: 0.12 },
+      { threshold: 0.12 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -33,7 +34,17 @@ function RevealSection({ children, className = "" }) {
 }
 
 export default function HomePage() {
-  const featuredProducts = products.filter((p) => p.inStock).slice(0, 4);
+  // First 4 categories as featured fabric cards (one image per category)
+  const featuredFabrics = featuredByCategory.slice(0, 4);
+
+  // Hero image from Lace (first category)
+  const heroImageUrl = dynamicCategories[0]?.image ||
+    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80";
+
+  // Aso-Ebi background from Aso-Ebi category
+  const asoEbiCategory = dynamicCategories.find((c) => c.key === "Aso-Ebi");
+  const asoEbiBgUrl = asoEbiCategory?.previewImages?.[0] ||
+    "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1400&q=80";
 
   return (
     <div className={styles.page}>
@@ -41,7 +52,7 @@ export default function HomePage() {
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <img
-            src="https://a.storyblok.com/f/165154/1456x816/e762fa38aa/01_hero_fabric-types-guide.png"
+            src={heroImageUrl}
             alt="Premium luxury fabric"
             className={styles.heroBgImg}
           />
@@ -53,11 +64,7 @@ export default function HomePage() {
             Welcome to Rehoboth Fabrics{" "}
             <span
               className="material-symbols-outlined"
-              style={{
-                fontSize: "1.2em",
-                verticalAlign: "text-bottom",
-                marginLeft: "4px",
-              }}
+              style={{ fontSize: "1.2em", verticalAlign: "text-bottom", marginLeft: "4px" }}
             >
               handshake
             </span>
@@ -86,49 +93,11 @@ export default function HomePage() {
       {/* ── Marquee Strip ─────────────────────────────── */}
       <div className={styles.marqueeWrap}>
         <div className={styles.marquee}>
-          {[
-            "Lace",
-            "Ankara",
-            "Silk",
-            "George",
-            "Aso-Ebi",
-            "Guinea Brocade",
-            "Kampala",
-            "Cashmere",
-            "Cotton",
-            "Denim",
-            "Chiffon",
-            "Satin",
-            "Organza",
-            "Damask",
-            "Velvet",
-            "Adire",
-            "Kente",
-          ]
-            .concat([
-              "Lace",
-              "Ankara",
-              "Silk",
-              "George",
-              "Aso-Ebi",
-              "Guinea Brocade",
-              "Kampala",
-              "Cashmere",
-              "Cotton",
-              "Denim",
-              "Chiffon",
-              "Satin",
-              "Organza",
-              "Damask",
-              "Velvet",
-              "Adire",
-              "Kente",
-            ])
-            .map((t, i) => (
-              <span key={i} className={styles.marqueeItem}>
-                <span className={styles.marqueeGold}>✦</span> {t}
-              </span>
-            ))}
+          {[...dynamicCategories, ...dynamicCategories].map((cat, i) => (
+            <span key={i} className={styles.marqueeItem}>
+              <span className={styles.marqueeGold}>✦</span> {cat.name}
+            </span>
+          ))}
         </div>
       </div>
 
@@ -149,30 +118,31 @@ export default function HomePage() {
 
         <RevealSection>
           <div className={styles.collectionsGrid}>
-            {/* Large card */}
+            {/* Large card — first category */}
             <Link
               to="/shop"
               className={`${styles.collectionCard} ${styles.collectionCardLarge} fabric-shimmer`}
             >
               <img
-                src={categories[0].image}
-                alt={categories[0].name}
+                src={dynamicCategories[0].image}
+                alt={dynamicCategories[0].name}
                 className={styles.collectionImg}
               />
               <div className={styles.collectionOverlay} />
               <div className={styles.collectionInfo}>
                 <span className={styles.collectionTag}>
-                  {categories[0].count} styles
+                  {dynamicCategories[0].count} styles
                 </span>
-                <h3 className={styles.collectionName}>{categories[0].name}</h3>
+                <h3 className={styles.collectionName}>{dynamicCategories[0].name}</h3>
                 <p className={styles.collectionTagline}>
-                  {categories[0].tagline}
+                  {dynamicCategories[0].description}
                 </p>
               </div>
             </Link>
-            {/* Right stacked cards */}
+
+            {/* Right stacked cards — next 3 categories */}
             <div className={styles.collectionStack}>
-              {categories.slice(1, 4).map((cat) => (
+              {dynamicCategories.slice(1, 4).map((cat) => (
                 <Link
                   key={cat.id}
                   to="/shop"
@@ -185,9 +155,7 @@ export default function HomePage() {
                   />
                   <div className={styles.collectionOverlay} />
                   <div className={styles.collectionInfo}>
-                    <span className={styles.collectionTag}>
-                      {cat.count} styles
-                    </span>
+                    <span className={styles.collectionTag}>{cat.count} styles</span>
                     <h3 className={styles.collectionName}>{cat.name}</h3>
                   </div>
                 </Link>
@@ -197,7 +165,7 @@ export default function HomePage() {
         </RevealSection>
       </section>
 
-      {/* ── Featured Products ─────────────────────────── */}
+      {/* ── Featured Fabrics ───────────────────────────── */}
       <section className={`${styles.section} ${styles.sectionMuted}`}>
         <RevealSection>
           <div className={styles.sectionHeader}>
@@ -214,7 +182,7 @@ export default function HomePage() {
 
         <RevealSection>
           <div className={styles.productsGrid}>
-            {featuredProducts.map((p) => (
+            {featuredFabrics.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
@@ -225,7 +193,7 @@ export default function HomePage() {
       <section className={`${styles.section} ${styles.asoSection}`}>
         <div className={styles.asoBg}>
           <img
-            src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1400&q=80"
+            src={asoEbiBgUrl}
             alt="Aso-Ebi fabric display"
             className={styles.asoBgImg}
           />
@@ -244,16 +212,12 @@ export default function HomePage() {
             available.
           </p>
           <div className={styles.asoFeatures}>
-            {["Weddings", "Naming Ceremonies", "Birthdays", "Funerals"].map(
-              (f) => (
-                <span key={f} className={styles.asoFeature}>
-                  <span className="material-symbols-outlined">
-                    check_circle
-                  </span>
-                  {f}
-                </span>
-              ),
-            )}
+            {["Weddings", "Naming Ceremonies", "Birthdays", "Funerals"].map((f) => (
+              <span key={f} className={styles.asoFeature}>
+                <span className="material-symbols-outlined">check_circle</span>
+                {f}
+              </span>
+            ))}
           </div>
           <Link to="/aso-ebi" className={styles.asoBtn}>
             Order Aso-Ebi for Your Event
@@ -267,33 +231,13 @@ export default function HomePage() {
         <RevealSection>
           <div className={styles.trustGrid}>
             {[
-              {
-                icon: "verified",
-                title: "Authentic Fabrics",
-                sub: "Every fabric verified for quality and origin",
-              },
-              {
-                icon: "local_shipping",
-                title: "Nationwide Delivery",
-                sub: "Same-day dispatch in Lagos, 2-3 days nationwide",
-              },
-              {
-                icon: "groups",
-                title: "Aso-Ebi Specialists",
-                sub: "Trusted by 1,000+ events across Nigeria",
-              },
-              {
-                icon: "workspace_premium",
-                title: "Premium Quality",
-                sub: "Only the finest materials make our collection",
-              },
+              { icon: "verified",          title: "Authentic Fabrics",     sub: "Every fabric verified for quality and origin" },
+              { icon: "local_shipping",    title: "Nationwide Delivery",   sub: "Same-day dispatch in Lagos, 2-3 days nationwide" },
+              { icon: "groups",            title: "Aso-Ebi Specialists",   sub: "Trusted by 1,000+ events across Nigeria" },
+              { icon: "workspace_premium", title: "Premium Quality",       sub: "Only the finest materials make our collection" },
             ].map(({ icon, title, sub }) => (
               <div key={title} className={styles.trustCard}>
-                <span
-                  className={`material-symbols-outlined ${styles.trustIcon}`}
-                >
-                  {icon}
-                </span>
+                <span className={`material-symbols-outlined ${styles.trustIcon}`}>{icon}</span>
                 <h4 className={styles.trustTitle}>{title}</h4>
                 <p className={styles.trustSub}>{sub}</p>
               </div>
