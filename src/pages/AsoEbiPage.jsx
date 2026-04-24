@@ -1,15 +1,13 @@
 // File: src/pages/AsoEbiPage.jsx
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { asoEbiCollections } from "../data/products";
-import { dynamicCategories } from "../data/fabricUtils";
+import {
+  dynamicCategories,
+  getCategoryProducts,
+  getMaterialByKey,
+} from "../data/fabricUtils";
 import styles from "./AsoEbiPage.module.css";
-
-// Pull Aso-Ebi images from JSON
-const asoEbiCat = dynamicCategories.find((c) => c.key === "Aso-Ebi");
-const ASO_HERO_BG  = asoEbiCat?.previewImages?.[0] ||
-  "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1600&q=85";
-const ASO_CARD_IMAGES = asoEbiCat?.previewImages ?? [];
 
 const OCCASIONS = [
   "All",
@@ -22,6 +20,22 @@ const OCCASIONS = [
 
 export default function AsoEbiPage() {
   const [occasion, setOccasion] = useState("All");
+
+  // Pull Aso-Ebi images from JSON inside component
+  const { asoHeroBg, asoMaterials, asoFabricImages } = useMemo(() => {
+    const asoEbiCat = dynamicCategories.find((c) => c.key === "Aso-Ebi");
+    const heroBg =
+      asoEbiCat?.image ||
+      "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1600&q=85";
+    const materials = asoEbiCat ? getMaterialByKey("Aso-Ebi") : null;
+    const fabricImages = materials?.images?.slice(0, 12) ?? [];
+
+    return {
+      asoHeroBg: heroBg,
+      asoMaterials: materials,
+      asoFabricImages: fabricImages,
+    };
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -47,7 +61,7 @@ export default function AsoEbiPage() {
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <img
-            src={ASO_HERO_BG}
+            src={asoHeroBg}
             alt="Aso-Ebi fabrics"
             className={styles.heroBgImg}
           />
@@ -118,6 +132,47 @@ export default function AsoEbiPage() {
           </div>
         </div>
       </section>
+
+      {/* Aso-Ebi Fabrics Gallery from JSON */}
+      {ASO_FABRIC_IMAGES.length > 0 && (
+        <section className={styles.fabricGallerySection}>
+          <div className={styles.sectionInner}>
+            <div className={styles.sectionHeader}>
+              <div>
+                <span className={styles.eyebrowDark}>
+                  Aso-Ebi Fabric Selection
+                </span>
+                <h2 className={styles.sectionTitle}>Our Aso-Ebi Collection</h2>
+                <p className={styles.sectionSubtitle}>
+                  {ASO_MATERIALS?.description ||
+                    "Handpicked premium Aso-Ebi fabrics for your celebration."}
+                </p>
+              </div>
+            </div>
+            <div className={styles.fabricGalleryGrid}>
+              {ASO_FABRIC_IMAGES.map((img) => (
+                <div
+                  key={img.id}
+                  className={`${styles.fabricCard} fabric-shimmer`}
+                >
+                  <img src={img.url} alt={img.alt} loading="lazy" />
+                  <p className={styles.fabricAlt}>{img.alt}</p>
+                </div>
+              ))}
+            </div>
+            <div className={styles.galleryFooter}>
+              <p>
+                Colours available:{" "}
+                {ASO_MATERIALS?.colors?.join(", ") || "Multiple"}
+              </p>
+              <Link to="/shop" className={styles.viewAllBtn}>
+                View All Fabrics in Shop
+                <span className="material-symbols-outlined">east</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Collections */}
       <section className={styles.collectionsSection}>

@@ -670,6 +670,122 @@
   border-color: var(--primary);
 }
 
+/* Aso-Ebi Fabrics Gallery */
+.fabricGallerySection {
+  padding: 4rem 0;
+  background: var(--surface);
+  border-top: 1px solid rgba(194, 200, 194, 0.2);
+  border-bottom: 1px solid rgba(194, 200, 194, 0.2);
+}
+
+.sectionInner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+.sectionHeader {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.eyebrowDark {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.sectionTitle {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.sectionSubtitle {
+  font-size: 1rem;
+  color: var(--secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.fabricGalleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.fabricCard {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--neutral-light);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.fabricCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.fabricCard img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.fabricAlt {
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: var(--secondary);
+  line-height: 1.4;
+}
+
+.galleryFooter {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(194, 200, 194, 0.08);
+  border-radius: 8px;
+}
+
+.galleryFooter p {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.viewAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: var(--surface);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.viewAllBtn:hover {
+  background: var(--primary-dark);
+  transform: translateX(4px);
+}
+
+.viewAllBtn span {
+  font-size: 1.2rem;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .stepsGrid {
@@ -685,6 +801,9 @@
     grid-template-columns: 1fr;
     gap: 3rem;
   }
+  .fabricGalleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
 }
 
 @media (max-width: 640px) {
@@ -699,5 +818,12 @@
   }
   .orderFormWrap {
     padding: 1.5rem;
+  }
+  .fabricGalleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .sectionTitle {
+    font-size: 1.8rem;
   }
 }

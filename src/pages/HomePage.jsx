@@ -1,7 +1,7 @@
 // File: src/pages/HomePage.jsx
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { dynamicCategories, featuredByCategory } from "../data/fabricUtils";
+import { dynamicCategories, getFeaturedMaterials } from "../data/fabricUtils";
 import { asoEbiCollections } from "../data/products";
 import ProductCard from "../components/ProductCard";
 import styles from "./HomePage.module.css";
@@ -16,7 +16,7 @@ function useReveal() {
       ([entry]) => {
         if (entry.isIntersecting) el.classList.add(styles.revealed);
       },
-      { threshold: 0.12 }
+      { threshold: 0.12 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -34,16 +34,18 @@ function RevealSection({ children, className = "" }) {
 }
 
 export default function HomePage() {
-  // First 4 categories as featured fabric cards (one image per category)
-  const featuredFabrics = featuredByCategory.slice(0, 4);
+  // Featured materials: first 4 categories, 4 images each = 16 total
+  const featuredFabrics = getFeaturedMaterials(4, 4);
 
   // Hero image from Lace (first category)
-  const heroImageUrl = dynamicCategories[0]?.image ||
+  const heroImageUrl =
+    dynamicCategories[0]?.image ||
     "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80";
 
   // Aso-Ebi background from Aso-Ebi category
   const asoEbiCategory = dynamicCategories.find((c) => c.key === "Aso-Ebi");
-  const asoEbiBgUrl = asoEbiCategory?.previewImages?.[0] ||
+  const asoEbiBgUrl =
+    asoEbiCategory?.previewImages?.[0] ||
     "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1400&q=80";
 
   return (
@@ -64,7 +66,11 @@ export default function HomePage() {
             Welcome to Rehoboth Fabrics{" "}
             <span
               className="material-symbols-outlined"
-              style={{ fontSize: "1.2em", verticalAlign: "text-bottom", marginLeft: "4px" }}
+              style={{
+                fontSize: "1.2em",
+                verticalAlign: "text-bottom",
+                marginLeft: "4px",
+              }}
             >
               handshake
             </span>
@@ -133,7 +139,9 @@ export default function HomePage() {
                 <span className={styles.collectionTag}>
                   {dynamicCategories[0].count} styles
                 </span>
-                <h3 className={styles.collectionName}>{dynamicCategories[0].name}</h3>
+                <h3 className={styles.collectionName}>
+                  {dynamicCategories[0].name}
+                </h3>
                 <p className={styles.collectionTagline}>
                   {dynamicCategories[0].description}
                 </p>
@@ -155,7 +163,9 @@ export default function HomePage() {
                   />
                   <div className={styles.collectionOverlay} />
                   <div className={styles.collectionInfo}>
-                    <span className={styles.collectionTag}>{cat.count} styles</span>
+                    <span className={styles.collectionTag}>
+                      {cat.count} styles
+                    </span>
                     <h3 className={styles.collectionName}>{cat.name}</h3>
                   </div>
                 </Link>
@@ -182,7 +192,7 @@ export default function HomePage() {
 
         <RevealSection>
           <div className={styles.productsGrid}>
-            {featuredFabrics.map((p) => (
+            {featuredFabrics.slice(0, 8).map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
@@ -200,7 +210,7 @@ export default function HomePage() {
           <div className={styles.asoOverlay} />
         </div>
         <RevealSection className={styles.asoContent}>
-          <span className={styles.eyebrowLight}>Group Orders Welcome</span>
+          <span className={styles.eyebrowLight}>Bulk Orders Available</span>
           <h2 className={styles.asoTitle}>
             Celebrate Together with
             <br />
@@ -212,12 +222,16 @@ export default function HomePage() {
             available.
           </p>
           <div className={styles.asoFeatures}>
-            {["Weddings", "Naming Ceremonies", "Birthdays", "Funerals"].map((f) => (
-              <span key={f} className={styles.asoFeature}>
-                <span className="material-symbols-outlined">check_circle</span>
-                {f}
-              </span>
-            ))}
+            {["Weddings", "Naming Ceremonies", "Birthdays", "Funerals"].map(
+              (f) => (
+                <span key={f} className={styles.asoFeature}>
+                  <span className="material-symbols-outlined">
+                    check_circle
+                  </span>
+                  {f}
+                </span>
+              ),
+            )}
           </div>
           <Link to="/aso-ebi" className={styles.asoBtn}>
             Order Aso-Ebi for Your Event
@@ -231,13 +245,33 @@ export default function HomePage() {
         <RevealSection>
           <div className={styles.trustGrid}>
             {[
-              { icon: "verified",          title: "Authentic Fabrics",     sub: "Every fabric verified for quality and origin" },
-              { icon: "local_shipping",    title: "Nationwide Delivery",   sub: "Same-day dispatch in Lagos, 2-3 days nationwide" },
-              { icon: "groups",            title: "Aso-Ebi Specialists",   sub: "Trusted by 1,000+ events across Nigeria" },
-              { icon: "workspace_premium", title: "Premium Quality",       sub: "Only the finest materials make our collection" },
+              {
+                icon: "verified",
+                title: "Authentic Fabrics",
+                sub: "Every fabric verified for quality and origin",
+              },
+              {
+                icon: "local_shipping",
+                title: "Nationwide Delivery",
+                sub: "Same-day dispatch in Lagos, 2-3 days nationwide",
+              },
+              {
+                icon: "groups",
+                title: "Aso-Ebi Specialists",
+                sub: "Trusted by 1,000+ events across Nigeria",
+              },
+              {
+                icon: "workspace_premium",
+                title: "Premium Quality",
+                sub: "Only the finest materials make our collection",
+              },
             ].map(({ icon, title, sub }) => (
               <div key={title} className={styles.trustCard}>
-                <span className={`material-symbols-outlined ${styles.trustIcon}`}>{icon}</span>
+                <span
+                  className={`material-symbols-outlined ${styles.trustIcon}`}
+                >
+                  {icon}
+                </span>
                 <h4 className={styles.trustTitle}>{title}</h4>
                 <p className={styles.trustSub}>{sub}</p>
               </div>
